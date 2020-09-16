@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		AB92E2182512486D00D3E9C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB92E2172512486D00D3E9C5 /* Assets.xcassets */; };
 		AB92E21B2512486D00D3E9C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB92E2192512486D00D3E9C5 /* LaunchScreen.storyboard */; };
 		AB92E22325124B4F00D3E9C5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB92E22225124B4F00D3E9C5 /* GoogleService-Info.plist */; };
+		AB92E22525128B0D00D3E9C5 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92E22425128B0D00D3E9C5 /* TodoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		AB92E21A2512486D00D3E9C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB92E21C2512486D00D3E9C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB92E22225124B4F00D3E9C5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AB92E22425128B0D00D3E9C5 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		DD498D186E0F0A1304637529 /* Pods_firebaseintro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_firebaseintro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFC4EE8222842653BA908B15 /* Pods-firebaseintro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-firebaseintro.debug.xcconfig"; path = "Target Support Files/Pods-firebaseintro/Pods-firebaseintro.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +80,7 @@
 				AB92E2102512486C00D3E9C5 /* SceneDelegate.swift */,
 				AB92E2122512486C00D3E9C5 /* ViewController.swift */,
 				AB92E2142512486C00D3E9C5 /* Main.storyboard */,
+				AB92E22425128B0D00D3E9C5 /* TodoTableViewCell.swift */,
 				AB92E2172512486D00D3E9C5 /* Assets.xcassets */,
 				AB92E2192512486D00D3E9C5 /* LaunchScreen.storyboard */,
 				AB92E21C2512486D00D3E9C5 /* Info.plist */,
@@ -91,7 +94,6 @@
 				EFC4EE8222842653BA908B15 /* Pods-firebaseintro.debug.xcconfig */,
 				786CC1B7673B748E7D3666FA /* Pods-firebaseintro.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -213,6 +215,7 @@
 				AB92E2132512486C00D3E9C5 /* ViewController.swift in Sources */,
 				AB92E20F2512486C00D3E9C5 /* AppDelegate.swift in Sources */,
 				AB92E2112512486C00D3E9C5 /* SceneDelegate.swift in Sources */,
+				AB92E22525128B0D00D3E9C5 /* TodoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
