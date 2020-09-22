@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
     @IBOutlet weak var todoTextfield: UITextField!
@@ -18,8 +18,8 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     var ref: DatabaseReference!
 
-    var todolist = [String]()
-    
+    var todolist = [[String: Any]]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -27,6 +27,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         ref = Database.database().reference()
         
         todoTableview.dataSource = self
+        todoTableview.delegate = self
         
         /*
         self.ref.child("theuser").setValue(["username": "XYZ"])
@@ -48,8 +49,9 @@ class ViewController: UIViewController, UITableViewDataSource {
 
     func loadTodo()
     {
-        todolist.removeAll()
         
+        
+        /*
         ref.child("todo").observeSingleEvent(of: .value, with: { (snapshot) in
             
             for todothing in snapshot.children
@@ -67,13 +69,37 @@ class ViewController: UIViewController, UITableViewDataSource {
         }) { (error) in
             print(error.localizedDescription)
         }
+        */
+        
+        ref.child("todomore").observeSingleEvent(of: .value, with: { [self] (snapshot) in
+            todolist.removeAll()
+            for todothing in snapshot.children
+            {
+                let todosnapshot = todothing as! DataSnapshot
+                
+                print(todosnapshot.key)
+                print(todosnapshot.value!)
+                
+                var tododict = todosnapshot.value as! [String : Any]
+                tododict["fbkey"] = todosnapshot.key
+                
+                self.todolist.append(tododict)
+            }
+            self.todoTableview.reloadData()
+            
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
     
     
     
     @IBAction func addTodo(_ sender: Any) {
         
-        self.ref.child("todo").childByAutoId().setValue(todoTextfield.text)
+        let newtodo : [String : Any] = ["todotitle": todoTextfield.text!, "tododone": false]
+        
+        self.ref.child("todomore").childByAutoId().setValue(newtodo)
         loadTodo()
     }
     
@@ -86,12 +112,41 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "todocell") as! TodoTableViewCell
         
-        cell.todoLabel.text = todolist[indexPath.row]
+        let todoitem = todolist[indexPath.row]
+        
+        cell.todoLabel.text = (todoitem["todotitle"] as! String)
+        
+        if(todoitem["tododone"] as! Bool == true)
+        {
+            cell.todoDoneView.backgroundColor = UIColor.green
+        } else {
+            cell.todoDoneView.backgroundColor = UIColor.red
+        }
         
         return cell
-        
-        
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(todolist.count == 0)
+        {
+            return
+        }
+        
+        let todoitem = todolist[indexPath.row]
+        
+        print(todoitem["todotitle"])
+        print(todoitem["fbkey"])
+        
+        if(todoitem["tododone"] as! Bool == true)
+        {
+            self.ref.child("todomore").child(todoitem["fbkey"] as! String).child("tododone").setValue(false)
+        } else {
+            self.ref.child("todomore").child(todoitem["fbkey"] as! String).child("tododone").setValue(true)
+        }
+        
+        loadTodo()
+        
+    }
+    
 }
 
