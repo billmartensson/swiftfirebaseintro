@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		75D5531981A17D5EC7D322DA /* Pods_firebaseintro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD498D186E0F0A1304637529 /* Pods_firebaseintro.framework */; };
+		AB4A869A251B67D40067BAFE /* LoginRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4A8699251B67D40067BAFE /* LoginRegisterViewController.swift */; };
 		AB92E20F2512486C00D3E9C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92E20E2512486C00D3E9C5 /* AppDelegate.swift */; };
 		AB92E2112512486C00D3E9C5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92E2102512486C00D3E9C5 /* SceneDelegate.swift */; };
 		AB92E2132512486C00D3E9C5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92E2122512486C00D3E9C5 /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		786CC1B7673B748E7D3666FA /* Pods-firebaseintro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-firebaseintro.release.xcconfig"; path = "Target Support Files/Pods-firebaseintro/Pods-firebaseintro.release.xcconfig"; sourceTree = "<group>"; };
+		AB4A8699251B67D40067BAFE /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterViewController.swift; sourceTree = "<group>"; };
 		AB92E20B2512486C00D3E9C5 /* firebaseintro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = firebaseintro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB92E20E2512486C00D3E9C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB92E2102512486C00D3E9C5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				AB92E2102512486C00D3E9C5 /* SceneDelegate.swift */,
 				AB92E2122512486C00D3E9C5 /* ViewController.swift */,
 				AB92E2142512486C00D3E9C5 /* Main.storyboard */,
+				AB4A8699251B67D40067BAFE /* LoginRegisterViewController.swift */,
 				AB92E22425128B0D00D3E9C5 /* TodoTableViewCell.swift */,
 				AB92E2172512486D00D3E9C5 /* Assets.xcassets */,
 				AB92E2192512486D00D3E9C5 /* LaunchScreen.storyboard */,
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB4A869A251B67D40067BAFE /* LoginRegisterViewController.swift in Sources */,
 				AB92E2132512486C00D3E9C5 /* ViewController.swift in Sources */,
 				AB92E20F2512486C00D3E9C5 /* AppDelegate.swift in Sources */,
 				AB92E2112512486C00D3E9C5 /* SceneDelegate.swift in Sources */,

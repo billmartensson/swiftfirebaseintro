@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import FirebaseAuth
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -29,6 +30,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         todoTableview.dataSource = self
         todoTableview.delegate = self
         
+        
+        
+        
         /*
         self.ref.child("theuser").setValue(["username": "XYZ"])
         
@@ -43,10 +47,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         */
         
-        loadTodo()
+        
         
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if(Auth.auth().currentUser == nil)
+        {
+            performSegue(withIdentifier: "gologin", sender: nil)
+        } else {
+            
+            print(Auth.auth().currentUser?.uid)
+            
+            loadTodo()
+        }
+        
+    }
+    
     func loadTodo()
     {
         
@@ -71,7 +93,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         */
         
-        ref.child("todomore").observeSingleEvent(of: .value, with: { [self] (snapshot) in
+        ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value, with: { [self] (snapshot) in
             todolist.removeAll()
             for todothing in snapshot.children
             {
@@ -99,9 +121,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let newtodo : [String : Any] = ["todotitle": todoTextfield.text!, "tododone": false]
         
-        self.ref.child("todomore").childByAutoId().setValue(newtodo)
+        self.ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).childByAutoId().setValue(newtodo)
         loadTodo()
     }
+    
+    
+    @IBAction func letsLogout(_ sender: Any) {
+        
+        do {
+            try Auth.auth().signOut()
+            performSegue(withIdentifier: "gologin", sender: nil)
+        } catch {
+            
+        }
+        
+        
+    }
+    
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -139,9 +175,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if(todoitem["tododone"] as! Bool == true)
         {
-            self.ref.child("todomore").child(todoitem["fbkey"] as! String).child("tododone").setValue(false)
+            self.ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).child(todoitem["fbkey"] as! String).child("tododone").setValue(false)
         } else {
-            self.ref.child("todomore").child(todoitem["fbkey"] as! String).child("tododone").setValue(true)
+            self.ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).child(todoitem["fbkey"] as! String).child("tododone").setValue(true)
         }
         
         loadTodo()
