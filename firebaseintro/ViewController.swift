@@ -173,6 +173,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print(todoitem["todotitle"])
         print(todoitem["fbkey"])
         
+        /*
         if(todoitem["tododone"] as! Bool == true)
         {
             self.ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).child(todoitem["fbkey"] as! String).child("tododone").setValue(false)
@@ -181,6 +182,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         loadTodo()
+        */
+        
+        performSegue(withIdentifier: "gotodo", sender: todoitem)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if(segue.identifier == "gotodo")
+        {
+            var dest = segue.destination as! TodoDetailViewController
+            dest.thetodoinfo = sender as! [String: Any]
+        }
+        
         
     }
     
