@@ -6,13 +6,19 @@
 //
 
 import UIKit
+import Firebase
 
 class TodoDetailViewController: UIViewController {
 
     
     @IBOutlet weak var todoTopLabel: UILabel!
     
+    @IBOutlet weak var doneButton: UIButton!
+    
+    
     var thetodoinfo = [String: Any]()
+    
+    var parentVC : ViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,17 +26,37 @@ class TodoDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         todoTopLabel.text = thetodoinfo["todotitle"] as! String
+        
+        if(thetodoinfo["tododone"] as! Bool == true)
+        {
+            doneButton.backgroundColor = UIColor.green
+        } else {
+            doneButton.backgroundColor = UIColor.red
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillDisappear(_ animated: Bool) {
+        parentVC.loadTodo()
     }
-    */
+
+    @IBAction func changeTodoDone(_ sender: Any) {
+        
+        var ref = Database.database().reference()
+        
+        if(thetodoinfo["tododone"] as! Bool == true)
+        {
+            ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).child(thetodoinfo["fbkey"] as! String).child("tododone").setValue(false)
+            doneButton.backgroundColor = UIColor.red
+            thetodoinfo["tododone"] = false
+        } else {
+            ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).child(thetodoinfo["fbkey"] as! String).child("tododone").setValue(true)
+            doneButton.backgroundColor = UIColor.green
+            thetodoinfo["tododone"] = true
+        }
+        
+    
+        
+    }
+    
 
 }

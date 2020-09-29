@@ -71,8 +71,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func loadTodo()
     {
-        
-        
         /*
         ref.child("todo").observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -193,6 +191,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             var dest = segue.destination as! TodoDetailViewController
             dest.thetodoinfo = sender as! [String: Any]
+            dest.parentVC = self
         }
         
         
