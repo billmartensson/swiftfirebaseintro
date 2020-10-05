@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import FirebaseStorage
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -16,6 +17,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var todoTextfield: UITextField!
     @IBOutlet weak var todoTableview: UITableView!
     
+    
+    @IBOutlet weak var fbImageview: UIImageView!
     
     var ref: DatabaseReference!
 
@@ -30,8 +33,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         todoTableview.dataSource = self
         todoTableview.delegate = self
         
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference()
         
+        let myimageRef = storageRef.child("frog.jpg")
         
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        myimageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+          if let error = error {
+            // Uh-oh, an error occurred!
+          } else {
+            // Data is returned
+            let gottenimage = UIImage(data: data!)
+            self.fbImageview.image = gottenimage
+          }
+        }
         
         /*
         self.ref.child("theuser").setValue(["username": "XYZ"])
