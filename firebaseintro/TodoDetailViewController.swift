@@ -36,25 +36,8 @@ class TodoDetailViewController: UIViewController, UIImagePickerControllerDelegat
             doneButton.backgroundColor = UIColor.red
         }
         
-        // Get a reference to the storage service using the default Firebase App
-        let storage = Storage.storage()
-
-        // Create a storage reference from our storage service
-        let storageRef = storage.reference()
-        
-        let todoimageRef = storageRef.child("todoimages").child(thetodoinfo.firebaseid)
-        
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        todoimageRef.getData(maxSize: 10 * 1024 * 1024) { data, error in
-          if let error = error {
-            // Uh-oh, an error occurred!
-            print("Kan inte hämta bild")
-          } else {
-            // Data is returned
-            print("Yey. Kunde hämta bild")
-            let gottenimage = UIImage(data: data!)
-            self.todoImageview.image = gottenimage
-          }
+        thetodoinfo.getImage() { theimage in
+            todoImageview.image = theimage
         }
         
         
@@ -67,8 +50,9 @@ class TodoDetailViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBAction func saveTitle(_ sender: Any) {
         
+        thetodoinfo.todotitle = titleTextfield.text!
         
-        
+        thetodoinfo.save()
     }
     
     

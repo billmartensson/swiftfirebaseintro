@@ -59,8 +59,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             performSegue(withIdentifier: "gologin", sender: nil)
         } else {
             
-            print(Auth.auth().currentUser?.uid)
-            
             loadTodo()
         }
         
@@ -74,9 +72,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             {
                 let todosnapshot = todothing as! DataSnapshot
                                 
-                var tododict = todosnapshot.value as! [String : Any]
+                let tododict = todosnapshot.value as! [String : Any]
                 
-                var temptodo = TodoItem()
+                let temptodo = TodoItem()
                 temptodo.firebaseid = todosnapshot.key
                 temptodo.todotitle = tododict["todotitle"] as! String
                 temptodo.tododone = tododict["tododone"] as! Bool
@@ -95,10 +93,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func addTodo(_ sender: Any) {
         
-        let newtodo : [String : Any] = ["todotitle": todoTextfield.text!, "tododone": false]
+        let newTodo = TodoItem()
+        newTodo.todotitle = todoTextfield.text!
+        newTodo.save()
         
-        self.ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).childByAutoId().setValue(newtodo)
         loadTodo()
+        
     }
     
     
@@ -153,7 +153,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if(segue.identifier == "gotodo")
         {
-            var dest = segue.destination as! TodoDetailViewController
+            let dest = segue.destination as! TodoDetailViewController
             dest.thetodoinfo = sender as! TodoItem
             dest.parentVC = self
         }
