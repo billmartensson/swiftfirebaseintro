@@ -11,6 +11,15 @@ import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
 
+
+class TodoItem
+{
+    var todotitle = ""
+    var tododone = false
+    var firebaseid = ""
+}
+
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
@@ -22,7 +31,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var ref: DatabaseReference!
 
-    var todolist = [[String: Any]]()
+    var todolist = [TodoItem]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,14 +124,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             for todothing in snapshot.children
             {
                 let todosnapshot = todothing as! DataSnapshot
-                
-                print(todosnapshot.key)
-                print(todosnapshot.value!)
-                
+                                
                 var tododict = todosnapshot.value as! [String : Any]
-                tododict["fbkey"] = todosnapshot.key
                 
-                self.todolist.append(tododict)
+                var temptodo = TodoItem()
+                temptodo.firebaseid = todosnapshot.key
+                temptodo.todotitle = tododict["todotitle"] as! String
+                temptodo.tododone = tododict["tododone"] as! Bool
+                
+                todolist.append(temptodo)
             }
             self.todoTableview.reloadData()
             
@@ -165,11 +175,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "todocell") as! TodoTableViewCell
         
-        let todoitem = todolist[indexPath.row]
+        let todoRowInfo = todolist[indexPath.row]
         
-        cell.todoLabel.text = (todoitem["todotitle"] as! String)
+        cell.todoLabel.text = todoRowInfo.todotitle
         
-        if(todoitem["tododone"] as! Bool == true)
+        if(todoRowInfo.tododone == true)
         {
             cell.todoDoneView.backgroundColor = UIColor.green
         } else {
@@ -186,9 +196,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         let todoitem = todolist[indexPath.row]
-        
-        print(todoitem["todotitle"])
-        print(todoitem["fbkey"])
         
         /*
         if(todoitem["tododone"] as! Bool == true)
