@@ -11,21 +11,10 @@ import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
 
-
-class TodoItem
-{
-    var todotitle = ""
-    var tododone = false
-    var firebaseid = ""
-}
-
-
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
     
     @IBOutlet weak var todoTextfield: UITextField!
     @IBOutlet weak var todoTableview: UITableView!
-    
     
     @IBOutlet weak var fbImageview: UIImageView!
     
@@ -61,26 +50,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
           }
         }
         
-        /*
-        self.ref.child("theuser").setValue(["username": "XYZ"])
-        
-        ref.child("firstname").observeSingleEvent(of: .value, with: { (snapshot) in
-          
-            var thefirstname = snapshot.value as! String
-            
-            print(thefirstname)
-            
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-        */
-        
-        
-        
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,26 +68,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func loadTodo()
     {
-        /*
-        ref.child("todo").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            for todothing in snapshot.children
-            {
-                let todosnapshot = todothing as! DataSnapshot
-                
-                print(todosnapshot.key)
-                print(todosnapshot.value)
-                
-                self.todolist.append(todosnapshot.value as! String)
-            }
-            self.todoTableview.reloadData()
-            
-            
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-        */
-        
         ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value, with: { [self] (snapshot) in
             todolist.removeAll()
             for todothing in snapshot.children
@@ -197,17 +146,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let todoitem = todolist[indexPath.row]
         
-        /*
-        if(todoitem["tododone"] as! Bool == true)
-        {
-            self.ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).child(todoitem["fbkey"] as! String).child("tododone").setValue(false)
-        } else {
-            self.ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).child(todoitem["fbkey"] as! String).child("tododone").setValue(true)
-        }
-        
-        loadTodo()
-        */
-        
         performSegue(withIdentifier: "gotodo", sender: todoitem)
     }
     
@@ -216,7 +154,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if(segue.identifier == "gotodo")
         {
             var dest = segue.destination as! TodoDetailViewController
-            dest.thetodoinfo = sender as! [String: Any]
+            dest.thetodoinfo = sender as! TodoItem
             dest.parentVC = self
         }
         

@@ -12,14 +12,13 @@ import FirebaseStorage
 class TodoDetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     
-    @IBOutlet weak var todoTopLabel: UILabel!
+    @IBOutlet weak var titleTextfield: UITextField!
     
     @IBOutlet weak var doneButton: UIButton!
     
     @IBOutlet weak var todoImageview: UIImageView!
     
-    
-    var thetodoinfo = [String: Any]()
+    var thetodoinfo = TodoItem()
     
     var parentVC : ViewController!
     
@@ -28,9 +27,9 @@ class TodoDetailViewController: UIViewController, UIImagePickerControllerDelegat
 
         // Do any additional setup after loading the view.
         
-        todoTopLabel.text = thetodoinfo["todotitle"] as! String
+        titleTextfield.text = thetodoinfo.todotitle
         
-        if(thetodoinfo["tododone"] as! Bool == true)
+        if(thetodoinfo.tododone == true)
         {
             doneButton.backgroundColor = UIColor.green
         } else {
@@ -43,7 +42,7 @@ class TodoDetailViewController: UIViewController, UIImagePickerControllerDelegat
         // Create a storage reference from our storage service
         let storageRef = storage.reference()
         
-        let todoimageRef = storageRef.child("todoimages").child(thetodoinfo["fbkey"] as! String)
+        let todoimageRef = storageRef.child("todoimages").child(thetodoinfo.firebaseid)
         
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         todoimageRef.getData(maxSize: 10 * 1024 * 1024) { data, error in
@@ -65,23 +64,23 @@ class TodoDetailViewController: UIViewController, UIImagePickerControllerDelegat
         parentVC.loadTodo()
     }
 
-    @IBAction func changeTodoDone(_ sender: Any) {
-        
-        var ref = Database.database().reference()
-        
-        if(thetodoinfo["tododone"] as! Bool == true)
-        {
-            ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).child(thetodoinfo["fbkey"] as! String).child("tododone").setValue(false)
-            doneButton.backgroundColor = UIColor.red
-            thetodoinfo["tododone"] = false
-        } else {
-            ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).child(thetodoinfo["fbkey"] as! String).child("tododone").setValue(true)
-            doneButton.backgroundColor = UIColor.green
-            thetodoinfo["tododone"] = true
-        }
-        
     
+    @IBAction func saveTitle(_ sender: Any) {
         
+        
+        
+    }
+    
+    
+    
+    @IBAction func changeTodoDone(_ sender: Any) {
+        thetodoinfo.changeDone()
+        if(thetodoinfo.tododone == true)
+        {
+            doneButton.backgroundColor = UIColor.green
+        } else {
+            doneButton.backgroundColor = UIColor.red
+        }
     }
     
     
@@ -108,7 +107,7 @@ class TodoDetailViewController: UIViewController, UIImagePickerControllerDelegat
         
         let storage = Storage.storage()
         let storageRef = storage.reference()
-        let todoimageRef = storageRef.child("todoimages").child(thetodoinfo["fbkey"] as! String)
+        let todoimageRef = storageRef.child("todoimages").child(thetodoinfo.firebaseid)
         
         let uploadTask = todoimageRef.putData(jpegImage!, metadata: nil) { (metadata, error) in
           guard let metadata = metadata else {

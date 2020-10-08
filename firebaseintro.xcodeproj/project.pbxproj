@@ -18,6 +18,7 @@
 		AB92E21B2512486D00D3E9C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB92E2192512486D00D3E9C5 /* LaunchScreen.storyboard */; };
 		AB92E22325124B4F00D3E9C5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB92E22225124B4F00D3E9C5 /* GoogleService-Info.plist */; };
 		AB92E22525128B0D00D3E9C5 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92E22425128B0D00D3E9C5 /* TodoTableViewCell.swift */; };
+		ABAA4C18252F00F90065607F /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAA4C17252F00F90065607F /* TodoItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		AB92E21C2512486D00D3E9C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB92E22225124B4F00D3E9C5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AB92E22425128B0D00D3E9C5 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
+		ABAA4C17252F00F90065607F /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 		DD498D186E0F0A1304637529 /* Pods_firebaseintro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_firebaseintro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFC4EE8222842653BA908B15 /* Pods-firebaseintro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-firebaseintro.debug.xcconfig"; path = "Target Support Files/Pods-firebaseintro/Pods-firebaseintro.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +85,7 @@
 				AB92E20E2512486C00D3E9C5 /* AppDelegate.swift */,
 				AB92E2102512486C00D3E9C5 /* SceneDelegate.swift */,
 				AB92E2122512486C00D3E9C5 /* ViewController.swift */,
+				ABAA4C17252F00F90065607F /* TodoItem.swift */,
 				AB92E2142512486C00D3E9C5 /* Main.storyboard */,
 				AB2459A22521F66D000FFC9F /* TodoDetailViewController.swift */,
 				AB4A8699251B67D40067BAFE /* LoginRegisterViewController.swift */,
@@ -218,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABAA4C18252F00F90065607F /* TodoItem.swift in Sources */,
 				AB4A869A251B67D40067BAFE /* LoginRegisterViewController.swift in Sources */,
 				AB92E2132512486C00D3E9C5 /* ViewController.swift in Sources */,
 				AB92E20F2512486C00D3E9C5 /* AppDelegate.swift in Sources */,
