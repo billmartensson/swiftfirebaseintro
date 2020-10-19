@@ -37,7 +37,7 @@ class TodoDetailViewController: UIViewController, UIImagePickerControllerDelegat
         }
         
         thetodoinfo.getImage() { theimage in
-            todoImageview.image = theimage
+            self.todoImageview.image = theimage
         }
         
         
