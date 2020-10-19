@@ -43,11 +43,14 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="niM-aC-QwC">
                                 <rect key="frame" x="324" y="49" width="70" height="40"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="2Pe-nx-lbY"/>
                                     <constraint firstAttribute="width" constant="70" id="Qdp-DM-5FP"/>
                                 </constraints>
-                                <state key="normal" title="Lägg till"/>
+                                <state key="normal" title="Lägg till">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="addTodo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NY8-aU-bI2"/>
                                 </connections>

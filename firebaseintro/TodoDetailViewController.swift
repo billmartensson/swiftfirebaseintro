@@ -35,9 +35,9 @@ class TodoDetailViewController: UIViewController, UIImagePickerControllerDelegat
         } else {
             doneButton.backgroundColor = UIColor.red
         }
-        
+        //
         thetodoinfo.getImage() { theimage in
-            todoImageview.image = theimage
+            self.todoImageview.image = theimage
         }
         
         

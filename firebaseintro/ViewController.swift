@@ -11,6 +11,8 @@ import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
 
+// DETTA ÄR DEV
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var todoTextfield: UITextField!
