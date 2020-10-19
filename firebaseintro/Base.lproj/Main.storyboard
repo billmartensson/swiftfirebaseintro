@@ -105,7 +105,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemYellowColor"/>
                         <constraints>
                             <constraint firstItem="oaX-dh-3GX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="CxU-8N-C1d"/>
                             <constraint firstItem="PBB-ws-BMe" firstAttribute="top" secondItem="u6O-Uu-SAi" secondAttribute="bottom" constant="5" id="DN9-vu-r0r"/>
@@ -314,6 +314,9 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
