@@ -15,6 +15,8 @@ class TodoItem
     var tododone = false
     var firebaseid = ""
     
+    var mylist = TodoList()
+    
     func changeDone()
     {
         let ref = Database.database().reference()
@@ -26,7 +28,7 @@ class TodoItem
             tododone = true
         }
 
-        ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).child(firebaseid).child("tododone").setValue(tododone)
+        ref.child("todoadvanced").child("todoitems").child(mylist.firebaseid).child(firebaseid).child("tododone").setValue(tododone)
 
     }
     
@@ -36,7 +38,7 @@ class TodoItem
         
         let newtodo : [String : Any] = ["todotitle": todotitle, "tododone": tododone]
         
-        let todoUserRef = ref.child("todomoreusers").child(Auth.auth().currentUser!.uid)
+        let todoUserRef = ref.child("todoadvanced").child("todoitems").child(mylist.firebaseid)
         
         if(firebaseid == "")
         {

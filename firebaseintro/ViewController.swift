@@ -22,8 +22,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var ref: DatabaseReference!
 
-    var todolist = [TodoItem]()
-
+    var currentList = TodoList()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -61,45 +61,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             performSegue(withIdentifier: "gologin", sender: nil)
         } else {
             
-            loadTodo()
+            currentList.loadTodoItems() {
+                self.todoTableview.reloadData()
+            }
         }
         
     }
     
-    func loadTodo()
-    {
-        ref.child("todomoreusers").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value, with: { [self] (snapshot) in
-            todolist.removeAll()
-            for todothing in snapshot.children
-            {
-                let todosnapshot = todothing as! DataSnapshot
-                                
-                let tododict = todosnapshot.value as! [String : Any]
-                
-                let temptodo = TodoItem()
-                temptodo.firebaseid = todosnapshot.key
-                temptodo.todotitle = tododict["todotitle"] as! String
-                temptodo.tododone = tododict["tododone"] as! Bool
-                
-                todolist.append(temptodo)
-            }
-            self.todoTableview.reloadData()
-            
-            
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-    }
+    
     
     
     
     @IBAction func addTodo(_ sender: Any) {
         
-        let newTodo = TodoItem()
-        newTodo.todotitle = todoTextfield.text!
-        newTodo.save()
-        
-        loadTodo()
+        currentList.addNewItems(itemtitle: todoTextfield.text!)
         
     }
     
@@ -119,14 +94,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todolist.count
+        
+        if let items = currentList.items {
+            return items.count
+        }
+        
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "todocell") as! TodoTableViewCell
         
-        let todoRowInfo = todolist[indexPath.row]
+        let todoRowInfo = currentList.items![indexPath.row]
         
         cell.todoLabel.text = todoRowInfo.todotitle
         
@@ -141,6 +121,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        /*
         if(todolist.count == 0)
         {
             return
@@ -149,6 +130,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let todoitem = todolist[indexPath.row]
         
         performSegue(withIdentifier: "gotodo", sender: todoitem)
+        */
+        
+        let todoRowInfo = currentList.items![indexPath.row]
+        todoRowInfo.changeDone()
+        todoTableview.reloadData()
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

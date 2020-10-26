@@ -44,7 +44,7 @@ class TodoDetailViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        parentVC.loadTodo()
+        //parentVC.loadTodo()
     }
 
     
