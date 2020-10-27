@@ -106,7 +106,10 @@ class TodoListsViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let dest = segue.destination as! ViewController
-        dest.currentList = todolists[sender as! Int]
+        if(segue.identifier == "todolist")
+        {
+            let dest = segue.destination as! ViewController
+            dest.currentList = todolists[sender as! Int]
+        }
     }
 }
